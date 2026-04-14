@@ -2,7 +2,7 @@ package br.inatel.poo.turmas;
 
 public class Turma {
     private int quantidadeAlunos = 0;
-    private Aluno[] alunos = new Aluno[20]; // Defina um tamanho seguro
+    private Aluno[] alunos = new Aluno[20];
 
     public void adicionarAluno(Aluno aluno) {
         if (quantidadeAlunos < alunos.length) {

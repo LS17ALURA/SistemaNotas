@@ -3,31 +3,30 @@ package br.inatel.poo.turmas;
 public class Aluno {
     private String nome;
     private String matricula;
-    private double[] nts; // Nome do atributo conforme o diagrama
+    private double[] notas; // Alterado de nts para notas
 
     public Aluno(String nome, String matricula, double[] notas) {
         this.nome = nome;
         this.matricula = matricula;
-        this.nts = notas;
+        this.notas = notas;
     }
 
-    // Getter para permitir que a classe Turma acesse o nome do aluno
     public String getNome() {
         return nome;
     }
 
     public double calcularMedia() {
         double soma = 0;
-        for (double nota : nts) {
+        for (double nota : notas) {
             soma += nota;
         }
-        return soma / nts.length;
+        return (notas.length > 0) ? soma / notas.length : 0;
     }
 
     public void mostrarInfo() {
         System.out.println("Nome: " + this.nome);
         System.out.println("Matrícula: " + this.matricula);
-        System.out.println("Média: " + String.format("%.2f", calcularMedia()));
+        System.out.printf("Média: %.2f%n", calcularMedia());
         System.out.println("-------------------------");
     }
 }

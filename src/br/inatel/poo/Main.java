@@ -3,22 +3,48 @@ package br.inatel.poo;
 import br.inatel.poo.turmas.Aluno;
 import br.inatel.poo.turmas.Turma;
 
+import java.util.Scanner;
+
 public class Main {
     public static void main(String[] args) {
-        Turma minhaTurma = new Turma();
+        Scanner scanner = new Scanner(System.in);
+        Turma turma = new Turma();
 
-        // Instanciando alunos com notas
-        minhaTurma.adicionarAluno(new Aluno("Marcos", "101", new double[]{8.0, 7.5, 9.0}));
-        minhaTurma.adicionarAluno(new Aluno("Julia", "102", new double[]{9.5, 10.0, 9.8}));
-        minhaTurma.adicionarAluno(new Aluno("Pedro", "103", new double[]{6.0, 5.5, 7.0}));
+        System.out.println("### SISTEMA ACADÊMICO INATEL ###");
+
+        // Criando os 3 objetos Aluno
+        for (int i = 1; i <= 3; i++) {
+            System.out.println("\nCadastro do Aluno " + i + ":");
+            System.out.print("Nome: ");
+            String nome = scanner.nextLine();
+
+            System.out.print("Matrícula: ");
+            String matricula = scanner.nextLine();
+
+            double[] notas = new double[3];
+            for (int j = 0; j < notas.length; j++) {
+                System.out.print("Nota " + (j + 1) + ": ");
+                notas[j] = scanner.nextDouble();
+            }
+            scanner.nextLine();
+
+            // Adicionando à turma
+            Aluno aluno = new Aluno(nome, matricula, notas);
+            turma.adicionarAluno(aluno);
+        }
 
         // Listagem
-        minhaTurma.listarAlunos();
+        System.out.println("\n--- RELATÓRIO GERAL ---");
+        turma.listarAlunos();
 
         // Melhor aluno
-        Aluno top = minhaTurma.buscarMelhorAluno();
-        if (top != null) {
-            System.out.println("O melhor aluno da turma é: " + top.getNome());
+        Aluno melhor = turma.buscarMelhorAluno();
+        if (melhor != null) {
+            System.out.println("--- DESTAQUE DA TURMA ---");
+            System.out.println("Melhor Aluno: " + melhor.getNome());
+            System.out.printf("Média Final: %.2f%n", melhor.calcularMedia());
         }
+
+        scanner.close();
     }
 }
